@@ -17,19 +17,19 @@ def plot_bar(labels, values, name):
 
 
 # test1 200um 63
-# test2 20um
+# test2 20um 139
 # test3-1 200um 63
-# test3-2 20um
+# test3-2 20um 210
 # test4 50um 90
 
 # 21.5 * 20 um , t  63
 def main():
-    path = './test4/test4.jpg'
-    measurement = 21.5 * 20 / 768
-
+    path = './test3/2/test3_2.jpg'
+    measurement = 21.5 * 2 / 768
     img = cv2.imread(path)
     gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-    ret, thresh1 = cv2.threshold(gray, 90, 255, cv2.THRESH_BINARY)
+    ret, thresh1 = cv2.threshold(gray, 210, 255, cv2.THRESH_BINARY)
+    # cv2.imwrite('./tmp/image' + str(i) + '.jpg', thresh1)
     # thresh1 = cv2.adaptiveThreshold(gray, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C, cv2.THRESH_BINARY, 101, 2)
     # kernel = np.ones((5, 5), np.uint8)
     # thresh1 = cv2.morphologyEx(thresh1, cv2.MORPH_OPEN, kernel)
