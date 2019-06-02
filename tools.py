@@ -51,7 +51,7 @@ def get_details(img, dictionary):
                         fontScale,
                         fontColor,
                         lineType)
-            with open('details' + str(int(avg)) + '.xls', 'a') as f:
+            with open('details.xls', 'a') as f:
                 f.write(str(counter) + ', ' + str(avg))
                 f.write('\n')
         img_name = int(d[0][4])

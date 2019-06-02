@@ -3,6 +3,7 @@ import tools
 import random
 import matplotlib.pyplot as plt
 from decimal import Decimal, ROUND_DOWN
+import numpy as np
 
 
 def plot_bar(labels, values, name):
@@ -14,14 +15,26 @@ def plot_bar(labels, values, name):
     plt.savefig('bar_plot' + str(name) + '.jpg')
     plt.clf()
 
-# 21.5 * 20 um
+
+# test1 200um 63
+# test2 20um
+# test3-1 200um 63
+# test3-2 20um
+# test4 50um 90
+
+# 21.5 * 20 um , t  63
 def main():
-    path = './test33.jpg'
+    path = './test4/test4.jpg'
     measurement = 21.5 * 20 / 768
 
     img = cv2.imread(path)
     gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-    ret, thresh1 = cv2.threshold(gray, 63, 255, cv2.THRESH_BINARY)
+    ret, thresh1 = cv2.threshold(gray, 90, 255, cv2.THRESH_BINARY)
+    # thresh1 = cv2.adaptiveThreshold(gray, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C, cv2.THRESH_BINARY, 101, 2)
+    # kernel = np.ones((5, 5), np.uint8)
+    # thresh1 = cv2.morphologyEx(thresh1, cv2.MORPH_OPEN, kernel)
+    # thresh1 = cv2.morphologyEx(thresh1, cv2.MORPH_CLOSE, kernel)
+
 
     # find Contours
     im2, contours, hierarchy = cv2.findContours(thresh1, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
@@ -72,7 +85,7 @@ def main():
         d = dictionary[i]
 
         count = len(d)
-        if count > 10000:
+        if count > 100:
             labels.append(list())
             values.append(list())
             d_temp = dict()
@@ -100,7 +113,8 @@ def main():
 
     plot_bar(labels[0], values[0], 'main')
     tools.get_details(img, dictionary)
-    # cv2.imshow('s', img)
+
+    # cv2.imshow('s', thresh1)
     #
     # cv2.waitKey(0)
     # cv2.destroyAllWindows()
